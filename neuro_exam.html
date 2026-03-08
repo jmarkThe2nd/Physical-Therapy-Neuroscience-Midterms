@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuro Midterm Exam — PT Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --teal: #0d6e6e;
+    --teal-light: #1a9090;
+    --teal-pale: #e0f5f5;
+    --red: #c0392b;
+    --red-pale: #fdecea;
+    --green: #1a7a4a;
+    --green-pale: #e8f5ee;
+    --gold: #c9a84c;
+    --navy: #0f2744;
+    --navy-mid: #1c3d60;
+    --cream: #f9f5ef;
+    --white: #ffffff;
+    --gray: #8a9bb0;
+    --gray-light: #e8edf3;
+    --text: #1e2d3d;
+    --shadow: 0 4px 24px rgba(15,39,68,0.10);
+    --shadow-lg: 0 12px 48px rgba(15,39,68,0.16);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 32px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--teal);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .logo-text {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .logo-title {
+    color: white;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+  }
+  .header-badge {
+    background: var(--teal);
+    color: white;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  /* HERO STRIP */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--teal) 100%);
+    padding: 48px 32px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 50%, rgba(13,110,110,0.3) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 4vw, 42px);
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero h1 em {
+    color: #7ee8e8;
+    font-style: italic;
+  }
+  .hero-sub {
+    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    position: relative;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    position: relative;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    color: #7ee8e8;
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* TOPIC NAV TABS */
+  .topic-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .tab-btn {
+    padding: 9px 18px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+    color: var(--navy-mid);
+    border-color: var(--gray-light);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .tab-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+  }
+  .tab-btn.active {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: white;
+    box-shadow: 0 4px 12px rgba(13,110,110,0.25);
+  }
+  .tab-btn.all-tab.active {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+
+  /* QUIZ AREA */
+  .quiz-section { display: none; }
+  .quiz-section.active { display: block; }
+
+  /* PROGRESS BAR */
+  .progress-wrap {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .progress-info { flex: 1; }
+  .progress-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+  .progress-bar-bg {
+    height: 8px;
+    background: var(--gray-light);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), #2bc0c0);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .progress-count {
+    font-family: 'Courier Prime', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    white-space: nowrap;
+  }
+  .score-badge {
+    background: var(--teal-pale);
+    color: var(--teal);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    animation: fadeSlide 0.35s ease;
+  }
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .question-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .q-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .q-topic-tag {
+    background: var(--teal-pale);
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .q-type-tag {
+    background: #f0f4ff;
+    color: #4466cc;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .question-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 20px;
+    color: var(--navy);
+    line-height: 1.45;
+    margin-bottom: 24px;
+  }
+
+  /* OPTIONS */
+  .options-grid {
+    display: grid;
+    gap: 10px;
+  }
+  .option-btn {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    border: 2px solid var(--gray-light);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    transition: all 0.18s;
+    line-height: 1.45;
+  }
+  .option-btn:hover:not(:disabled) {
+    border-color: var(--teal);
+    background: var(--teal-pale);
+    transform: translateX(3px);
+  }
+  .option-btn:disabled { cursor: default; }
+  .option-letter {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-light);
+    color: var(--navy-mid);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: all 0.18s;
+  }
+  .option-btn.correct {
+    border-color: var(--green);
+    background: var(--green-pale);
+  }
+  .option-btn.correct .option-letter {
+    background: var(--green);
+    color: white;
+  }
+  .option-btn.wrong {
+    border-color: var(--red);
+    background: var(--red-pale);
+  }
+  .option-btn.wrong .option-letter {
+    background: var(--red);
+    color: white;
+  }
+  .option-btn.reveal-correct {
+    border-color: var(--green);
+    background: var(--green-pale);
+    opacity: 0.7;
+  }
+
+  /* FEEDBACK */
+  .feedback-box {
+    margin-top: 18px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+    animation: fadeSlide 0.25s ease;
+  }
+  .feedback-box.correct {
+    background: var(--green-pale);
+    border-left: 4px solid var(--green);
+    color: var(--green);
+    display: block;
+  }
+  .feedback-box.wrong {
+    background: var(--red-pale);
+    border-left: 4px solid var(--red);
+    color: var(--red);
+    display: block;
+  }
+  .feedback-box strong { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+
+  /* NAV BUTTONS */
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    gap: 12px;
+  }
+  .btn {
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: white;
+    box-shadow: 0 4px 14px rgba(13,110,110,0.28);
+  }
+  .btn-primary:hover { background: var(--teal-light); transform: translateY(-1px); }
+  .btn-secondary {
+    background: white;
+    color: var(--navy-mid);
+    border: 2px solid var(--gray-light);
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+  .btn-navy {
+    background: var(--navy);
+    color: white;
+    box-shadow: 0 4px 14px rgba(15,39,68,0.25);
+  }
+  .btn-navy:hover { background: var(--navy-mid); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
+
+  /* RESULTS */
+  .results-card {
+    background: white;
+    border-radius: 20px;
+    padding: 48px 40px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    animation: fadeSlide 0.4s ease;
+    display: none;
+  }
+  .results-card.show { display: block; }
+  .results-icon {
+    font-size: 56px;
+    margin-bottom: 16px;
+  }
+  .results-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .results-sub {
+    color: var(--gray);
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  .score-ring {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: conic-gradient(var(--teal) var(--pct, 0%), var(--gray-light) 0%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+    box-shadow: 0 0 0 8px var(--teal-pale);
+    position: relative;
+  }
+  .score-ring-inner {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .score-pct {
+    font-family: 'Courier Prime', monospace;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1;
+  }
+  .score-label { font-size: 11px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.08em; }
+  .results-breakdown {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .breakdown-item {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 16px 24px;
+    min-width: 100px;
+  }
+  .breakdown-num {
+    font-family: 'Courier Prime', monospace;
+    font-size: 26px;
+    font-weight: 700;
+  }
+  .breakdown-num.green { color: var(--green); }
+  .breakdown-num.red { color: var(--red); }
+  .breakdown-label {
+    font-size: 12px;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-top: 2px;
+  }
+  .grade-banner {
+    padding: 14px 28px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 auto 28px;
+    display: inline-block;
+  }
+  .grade-a { background: var(--green-pale); color: var(--green); }
+  .grade-b { background: #eef4ff; color: #2255cc; }
+  .grade-c { background: #fff8e0; color: #a07000; }
+  .grade-d { background: var(--red-pale); color: var(--red); }
+
+  /* TOPIC REVIEW TABLE */
+  .review-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 13px;
+    text-align: left;
+  }
+  .review-table th {
+    background: var(--navy);
+    color: rgba(255,255,255,0.75);
+    padding: 10px 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+  }
+  .review-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--gray-light);
+    vertical-align: top;
+  }
+  .review-table tr:last-child td { border-bottom: none; }
+  .review-table tr:nth-child(even) td { background: var(--cream); }
+  .pill-correct { background: var(--green-pale); color: var(--green); border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 12px; }
+  .pill-wrong { background: var(--red-pale); color: var(--red); border-radius: 6px; padding: 2px 8px; font-weight: 700; font-size: 12px; }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray);
+  }
+  .empty-state-icon { font-size: 48px; margin-bottom: 12px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .hero-stats { gap: 16px; }
+    .question-card { padding: 20px; }
+    .results-card { padding: 28px 20px; }
+    .nav-buttons { flex-direction: column; }
+    .btn { width: 100%; text-align: center; }
+  }
+
+  /* SHIMMER LOADER */
+  .shimmer {
+    background: linear-gradient(90deg, var(--gray-light) 25%, #f0f4f8 50%, var(--gray-light) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.2s infinite;
+    border-radius: 8px;
+    height: 20px;
+    margin-bottom: 10px;
+  }
+  @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🧠</div>
+      <div>
+        <div class="logo-text">OPHT 1-1 · Midterm Review</div>
+        <div class="logo-title">NeuroSci Exam Prep</div>
+      </div>
+    </div>
+    <div class="header-badge">PT Edition</div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Physical Therapy · Neuroscience · Midterms</div>
+  <h1>Ventricles, Coverings &<br><em>Vascular Supply</em> of the Brain</h1>
+  <div class="hero-sub">Lesson 1 — Interactive Exam Practice · Sumalpong, Princess Kaeleen Loisse S.</div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="total-q-count">52</div>
+      <div class="hero-stat-label">Questions</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">5</div>
+      <div class="hero-stat-label">Topic Areas</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">MCQ</div>
+      <div class="hero-stat-label">Format</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <!-- TOPIC TABS -->
+  <div class="topic-nav" id="topicNav"></div>
+
+  <!-- QUIZ SECTIONS will be injected here -->
+  <div id="quizContainer"></div>
+</main>
+
+<script>
+// ============================================================
+// QUESTION BANK
+// ============================================================
+const topics = [
+  {
+    id: 'all',
+    label: '📋 Full Exam',
+    color: 'navy'
+  },
+  { id: 'ventricular', label: '🫧 Ventricular System' },
+  { id: 'meninges', label: '🧬 Meninges & Spaces' },
+  { id: 'csf', label: '💧 CSF & Barriers' },
+  { id: 'herniation', label: '⚠️ Clinical: Herniation' },
+  { id: 'skull', label: '💀 Skull & Foramina' },
+];
+
+const questions = [
+  // ── VENTRICULAR SYSTEM ──────────────────────────────────────
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'What is the largest of the brain ventricles?',
+    opts: ['Third ventricle','Fourth ventricle','Lateral ventricle','Cerebral aqueduct'],
+    ans: 2,
+    exp: 'The lateral ventricle is the largest, comprising a central portion (body and atrium) and three extensions (horns).'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'Which structure produces cerebrospinal fluid?',
+    opts: ['Ependyma','Choroid plexus','Arachnoid granulations','Pia mater'],
+    ans: 1,
+    exp: 'The choroid plexus is a fringe-like vascular process of pia mater containing capillaries that produces CSF.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The Foramen of Monro allows communication between which structures?',
+    opts: ['Third and fourth ventricles','Lateral and third ventricles','Fourth ventricle and subarachnoid space','Cerebral aqueduct and lateral ventricle'],
+    ans: 1,
+    exp: 'The Interventricular Foramen (Foramen of Monro) connects the lateral ventricle with the third ventricle.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The third ventricle is described as a narrow vertical cleft between the two halves of which structure?',
+    opts: ['Telencephalon','Mesencephalon','Diencephalon','Metencephalon'],
+    ans: 2,
+    exp: 'The third ventricle lies between the two halves of the diencephalon.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'Which recess of the third ventricle projects into the stalk of the pineal body and secretes melatonin?',
+    opts: ['Optic recess','Infundibular recess','Pineal recess','Suprapineal recess'],
+    ans: 2,
+    exp: 'The pineal recess projects into the stalk of the pineal body, which secretes melatonin.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The optic recess is an extension of the third ventricle that lies between which structures?',
+    opts: ['Lamina terminalis and optic chiasm','Fornix and thalamus','Anterior commissure and lamina terminalis','Corpus callosum and fornix'],
+    ans: 0,
+    exp: 'The optic recess is an extension of the third ventricle between the lamina terminalis and the optic chiasm.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The Cerebral Aqueduct (Aqueduct of Sylvius) connects which ventricles?',
+    opts: ['Lateral and third','Third and fourth','Fourth ventricle and subarachnoid space','Lateral and fourth'],
+    ans: 1,
+    exp: 'The Cerebral Aqueduct runs from the posterior third ventricle into the fourth ventricle. It has no choroid plexus.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The fourth ventricle is bounded ventrally by which structures?',
+    opts: ['Thalamus and hypothalamus','Pons and medulla oblongata','Midbrain and pons','Cerebellum and midbrain'],
+    ans: 1,
+    exp: 'The fourth ventricle is a pyramid-shaped cavity bounded ventrally by the pons and medulla oblongata.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The Foramen of Magendie is also called:',
+    opts: ['Lateral aperture','Medial aperture','Foramen of Luschka','Interventricular foramen'],
+    ans: 1,
+    exp: 'The Foramen of Magendie is the Medial Aperture — an opening in the caudal portion of the roof of the fourth ventricle.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'The Foramen of Luschka opens into the subarachnoid space near which cerebellar structure?',
+    opts: ['Vermis','Dentate nucleus','Flocculus','Uvula'],
+    ans: 2,
+    exp: 'The lateral aperture (Foramen of Luschka) opens from the lateral recess of the fourth ventricle into the subarachnoid space near the flocculus of the cerebellum.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'Which cells line the ventricular system?',
+    opts: ['Astrocytes','Oligodendrocytes','Ependymal cells','Microglia'],
+    ans: 2,
+    exp: 'The ventricular system is lined with ependyma (ependymal cells), which also produce and circulate CSF.'
+  },
+  {
+    topic: 'ventricular',
+    topicLabel: 'Ventricular System',
+    q: 'Tela choroidea refers to:',
+    opts: ['The attachment of the choroid plexus to adjacent brain structures','The blood vessel network within the choroid plexus','The ependymal lining of the ventricles','The membrane covering the choroid plexus'],
+    ans: 0,
+    exp: 'Tela choroidea is the name for the attachment of the choroid plexus to adjacent brain structures.'
+  },
+
+  // ── MENINGES & SPACES ──────────────────────────────────────
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The subdural space separates which two structures?',
+    opts: ['Pia mater and arachnoid mater','Dura mater and arachnoid mater','Skull and dura mater','Arachnoid mater and brain'],
+    ans: 1,
+    exp: 'The subdural space separates the dura mater (superiorly) from the arachnoid mater (inferiorly), containing a few drops of CSF.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The subarachnoid space lies between:',
+    opts: ['Dura and arachnoid mater','Arachnoid and pia mater','Pia mater and brain cortex','Skull and dura mater'],
+    ans: 1,
+    exp: 'The subarachnoid space lies inferior to the arachnoid mater and superior to the pia mater. It contains CSF and major arteries of the brain.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'Leptomeninges is composed of:',
+    opts: ['Dura and arachnoid mater','Pia and dura mater','Pia and arachnoid mater','Arachnoid and epidural tissue'],
+    ans: 2,
+    exp: 'Leptomeninges is composed of pia mater and arachnoid mater (the two inner, delicate meningeal layers). NOTE: The PDF states "pia and dura mater" but standard anatomy defines leptomeninges as pia + arachnoid.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The Perivascular Space (Virchow-Robin Space) is a narrow extension of which space?',
+    opts: ['Subdural space','Epidural space','Subarachnoid space','Intraventricular space'],
+    ans: 2,
+    exp: "The Virchow-Robin space is a narrow extension of the subarachnoid space along the pia mater that follows vessels deep into the brain tissue."
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The dura mater is also known as:',
+    opts: ['Leptomeninx','Arachnoid mater','Pachymeninx','Pia mater'],
+    ans: 2,
+    exp: 'Dura mater is also known as Pachymeninx — it is a tough fibrous structure with inner (meningeal) and outer (periosteal) layers.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'Which dural fold separates the occipital lobes from the cerebellum?',
+    opts: ['Falx cerebri','Falx cerebelli','Tentorium cerebelli','Diaphragma sellae'],
+    ans: 2,
+    exp: 'The tentorium cerebelli separates the occipital lobes from the cerebellum. It is a roughly transverse membrane that fuses with the falx cerebri towards the midline.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The tentorial notch (incisura tentoria) allows passage of which structures?',
+    opts: ['Cranial nerves III–VI','Upper brainstem, aqueduct, and vessels','Cerebral arteries only','Vertebral arteries and spinal cord'],
+    ans: 1,
+    exp: 'The free curved anterior border of the tentorium (tentorial notch) leaves a large opening for passage of the upper brainstem, aqueduct, and vessels.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The falx cerebri is attached to the skull from which landmark to which landmark?',
+    opts: ['Foramen magnum to sella turcica','Crista galli to internal occipital protuberance','Jugular foramen to cribriform plate','Foramen ovale to foramen magnum'],
+    ans: 1,
+    exp: 'The falx cerebri is attached to the inner surface of the skull midline from the crista galli anteriorly to the internal occipital protuberance posteriorly.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The diaphragma sellae forms a lid over the hypophysis. The pituitary stalk passes through this structure. Where does it connect?',
+    opts: ['Clinoid attachments of the two sides of the tentorium cerebelli','Falx cerebri and tentorium cerebelli','Foramen ovale and cavernous sinus','Petrous bone and clivus'],
+    ans: 0,
+    exp: 'The diaphragma sellae connects the clinoid attachments of the two sides of the tentorium cerebelli, forming an incomplete lid over the pituitary (hypophysis). The pituitary stalk passes through it.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'Arachnoid trabeculae connect the inner surface of the arachnoid to which structure?',
+    opts: ['Dura mater','Skull','Pia mater','Ependyma'],
+    ans: 2,
+    exp: 'Fine arachnoid trabeculae connect the inner surface of the arachnoid mater to the pia mater across the subarachnoid space.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'Where do arachnoid granulations absorb CSF?',
+    opts: ['Straight sinus','Cavernous sinus','Superior sagittal sinus','Transverse sinus'],
+    ans: 2,
+    exp: 'Arachnoid granulations are berry-like clumps that protrude into the superior sagittal sinus, where they absorb CSF back into the venous system.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'When the subarachnoid space widens at the base of the brain, the widened areas are called:',
+    opts: ['Sulci','Cisterns','Fissures','Foramina'],
+    ans: 1,
+    exp: 'Widened areas of the subarachnoid space are called cisterns. Examples include the cisterna magna and pontine cistern.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The cisterna magna is formed by the bridging of the arachnoid over the space between:',
+    opts: ['Pons and midbrain','Medulla and cerebellar hemispheres','Cerebellum and occipital bone','Temporal lobe and brainstem'],
+    ans: 1,
+    exp: 'The cisterna magna forms by bridging of the arachnoid over the space between the medulla and cerebral hemispheres, and is continuous with the spinal subarachnoid space.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'Which cistern contains the basilar artery and lies on the ventral aspect of the pons?',
+    opts: ['Cisterna magna','Chiasmatic cistern','Pontine cistern','Interpeduncular cistern'],
+    ans: 2,
+    exp: 'The pontine cistern lies on the ventral aspect of the pons and contains the basilar artery and some veins.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'The interpeduncular cistern is located between which structures?',
+    opts: ['Optic nerves','Cerebral peduncles','Temporal lobes','Thalami'],
+    ans: 1,
+    exp: 'The interpeduncular cistern lies between the cerebral peduncles, below the cerebrum.'
+  },
+  {
+    topic: 'meninges',
+    topicLabel: 'Meninges & Spaces',
+    q: 'Which layer of pia mater forms the tela choroidea of the 3rd and lateral ventricles?',
+    opts: ['Outer epipial layer','Intima pia','Inner pia that forms tela choroidea combined with ependyma and choroid vessels','Arachnoid-pia junction'],
+    ans: 2,
+    exp: 'The pia mater forms the tela choroidea of the 3rd and lateral ventricles. Combined with the ependyma and choroid vessels, it forms the choroid plexus of these ventricles.'
+  },
+
+  // ── CSF & BARRIERS ──────────────────────────────────────
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'What is the normal mean CSF pressure?',
+    opts: ['20–40 mmH₂O','70–180 mmH₂O','200–300 mmH₂O','10–30 mmHg'],
+    ans: 1,
+    exp: 'Normal mean CSF pressure is 70–180 mmH₂O.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'Which of the following can increase intracranial pressure?',
+    opts: ['Decreased blood volume only','Decreased CSF volume','Intracranial mass/tumors, hemorrhage, or hydrocephalus','Dehydration'],
+    ans: 2,
+    exp: 'Increased intracranial pressure can result from increased intracranial volume (mass/tumors, massive infarcts), increased blood volume (hemorrhage), or increased CSF volume (hydrocephalus).'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'CSF is described as:',
+    opts: ['Yellow and slightly viscous','Pink and protein-rich','Clear and colorless','Milky white'],
+    ans: 2,
+    exp: 'Cerebrospinal fluid is clear and colorless under normal conditions.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'Which type of hydrocephalus is the most common?',
+    opts: ['Communicating hydrocephalus','Normal pressure hydrocephalus','Non-communicating (obstructive) hydrocephalus','Hydrocephalus ex vacuo'],
+    ans: 2,
+    exp: 'Non-communicating (obstructive) hydrocephalus is the most common type. The ventricles cannot reach the subarachnoid space due to a blockage.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'In non-communicating hydrocephalus, what is the most common site of obstruction?',
+    opts: ['Foramen of Monro','Foramen of Luschka','Cerebral aqueduct','Foramen of Magendie'],
+    ans: 2,
+    exp: 'The cerebral aqueduct (Aqueduct of Sylvius) is the most common site of obstruction in non-communicating hydrocephalus.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'Communicating hydrocephalus involves obstruction in which space?',
+    opts: ['Ventricular system','Epidural space','Arachnoid space','Dural sinuses'],
+    ans: 2,
+    exp: 'Communicating hydrocephalus involves obstruction in the arachnoid space, which can result from prior bleeding or meningitis.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'Normal pressure hydrocephalus in the elderly is associated with which classic triad?',
+    opts: ['Headache, vomiting, papilledema','Gait disorder, incontinence, dementia','Hemiplegia, aphasia, facial palsy','Nausea, hearing loss, tinnitus'],
+    ans: 1,
+    exp: 'Normal pressure hydrocephalus may be accompanied by a gait disorder, incontinence, and dementia — the classic triad, especially in the elderly.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'Approximately what percentage of CSF is formed by active transport from blood vessels in the choroid plexus (Blood-CSF barrier)?',
+    opts: ['30%','45%','60%','80%'],
+    ans: 2,
+    exp: 'About 60% of CSF is formed by active transport from blood vessels in the choroid plexus (blood-CSF barrier).'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'The vascular-endothelial barrier promotes exchange of which substances between blood and brain?',
+    opts: ['Only glucose and insulin','Oxygen, carbon dioxide, amino acids, and sugars','Electrolytes and albumin','Large proteins and lipids'],
+    ans: 1,
+    exp: 'The vascular-endothelial barrier promotes exchange of oxygen, carbon dioxide, amino acids, and sugars between blood and brain. It is maintained by tight junctions.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'In which structure do epithelial cells form tight junctions to selectively permit passage of substances in the Blood-CSF barrier?',
+    opts: ['Arachnoid granulations','Ependyma of the ventricles','Epithelial cells of the choroid plexus','Endothelium of dural sinuses'],
+    ans: 2,
+    exp: 'In the blood-CSF barrier, the epithelial cells of the choroid plexus form a continuous layer joined by tight junctions that selectively permit passage of certain substances.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'The arachnoid barrier prevents substances that diffuse out of dural vessels from entering:',
+    opts: ['The subdural space','The CSF of the subarachnoid space','The brain parenchyma directly','The ventricular CSF'],
+    ans: 1,
+    exp: 'The arachnoid barrier prevents substances diffusing out of dural vessels from entering the CSF of the subarachnoid space.'
+  },
+  {
+    topic: 'csf',
+    topicLabel: 'CSF & Barriers',
+    q: 'After the CSF passes through the foramina of Luschka and Magendie, it enters which space?',
+    opts: ['Subdural space','Epidural space','Subarachnoid space','Intraventricular space'],
+    ans: 2,
+    exp: 'CSF exits the fourth ventricle through the foramina of Luschka (lateral apertures) and Magendie (medial aperture) and enters the subarachnoid space.'
+  },
+
+  // ── HERNIATION / CLINICAL ──────────────────────────────────
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'Transtentorial (uncal) herniation involves which structure being pushed through the tentorium?',
+    opts: ['Cingulate gyrus','Cerebellar tonsils','Uncus (medial temporal lobe)','Frontal lobe'],
+    ans: 2,
+    exp: 'In transtentorial (uncal) herniation, the uncus (medial temporal lobe) is pushed through the tentorium, compressing the brainstem and CN III.'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'What is the classic clinical sign of uncal herniation?',
+    opts: ['Contralateral dilated pupil and third nerve paresis','Ipsilateral dilated pupil and third nerve paresis','Bilateral Babinski signs','Sudden loss of consciousness with no pupil changes'],
+    ans: 1,
+    exp: 'The clinical sign of uncal herniation is an ipsilateral dilated pupil and third nerve (CN III, oculomotor) paresis due to compression of CN III as it passes near the uncus.'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'Subfalcine herniation involves which structure being displaced?',
+    opts: ['Uncus under the tentorium','Cingulate gyrus into or under the falx cerebri','Cerebellar tonsils into the foramen magnum','Temporal lobe into the posterior fossa'],
+    ans: 1,
+    exp: 'Subfalcine herniation occurs when the cingulate gyrus is displaced into or under the falx cerebri.'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'What is the clinical sign of subfalcine herniation?',
+    opts: ['Ipsilateral dilated pupil','Rapid brainstem compression','Lateral displacement of midline structures','Cerebellar tonsillar herniation'],
+    ans: 2,
+    exp: 'Subfalcine herniation results in lateral displacement of midline structures, visible on imaging.'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'Coning (tonsillar herniation) involves which structure being forced downward?',
+    opts: ['Uncus into the tentorium','Cingulate gyrus under the falx','Cerebellar tonsils into the foramen magnum','Temporal lobe into the posterior fossa'],
+    ans: 2,
+    exp: 'Coning (tonsillar herniation) occurs when the cerebellar tonsils are forced downward into the foramen magnum, causing rapid brainstem compression.'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'Why is coning (tonsillar herniation) considered the most dangerous of the herniations?',
+    opts: ['It causes ipsilateral blindness','It produces lateral midline shift','It causes rapid brainstem compression and is frequently fatal','It only causes mild headache'],
+    ans: 2,
+    exp: 'Coning causes rapid brainstem compression (as the cerebellar tonsils compress the medulla in the foramen magnum), and it is frequently fatal.'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'The tentorium cerebelli divides the cranial vault into which two compartments?',
+    opts: ['Anterior and posterior fossae','Left and right hemispheres','Supratentorial and infratentorial compartments','Cortical and subcortical compartments'],
+    ans: 2,
+    exp: 'The tentorium cerebelli is a dural septum that separates the supratentorial and infratentorial compartments. They communicate through the incisura (contains midbrain).'
+  },
+  {
+    topic: 'herniation',
+    topicLabel: 'Clinical: Herniation',
+    q: 'In a PT clinical setting, a patient has a brain tumor causing increased mass effect. Which herniation type would present with an ipsilateral fixed dilated pupil?',
+    opts: ['Subfalcine herniation','Tonsillar herniation','Transtentorial (uncal) herniation','Central herniation'],
+    ans: 2,
+    exp: 'Transtentorial (uncal) herniation compresses CN III (oculomotor nerve) ipsilaterally, causing a fixed dilated pupil (mydriasis) and oculomotor paresis on the same side as the lesion.'
+  },
+
+  // ── SKULL & FORAMINA ──────────────────────────────────────
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'Which cranial nerve exits through the stylomastoid foramen?',
+    opts: ['CN V (Trigeminal)','CN VI (Abducens)','CN VII (Facial)','CN IX (Glossopharyngeal)'],
+    ans: 2,
+    exp: 'The facial nerve (CN VII) exits the skull through the stylomastoid foramen at the base of the styloid process.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The foramen ovale transmits which nerve?',
+    opts: ['Ophthalmic division of trigeminal (V1)','Maxillary division of trigeminal (V2)','Mandibular division of trigeminal (V3)','Abducens nerve (VI)'],
+    ans: 2,
+    exp: 'The foramen ovale transmits the mandibular division (V3) of the trigeminal nerve, as well as the accessory meningeal artery and superficial petrosal nerve.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The middle meningeal artery and vein pass through which foramen?',
+    opts: ['Foramen ovale','Foramen rotundum','Foramen lacerum','Foramen spinosum'],
+    ans: 3,
+    exp: 'The foramen spinosum (posterior to foramen ovale) transmits the middle meningeal vessels.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The internal carotid artery (ICA) crosses which foramen?',
+    opts: ['Foramen spinosum','Foramen ovale','Foramen lacerum','Foramen rotundum'],
+    ans: 2,
+    exp: 'The internal carotid artery crosses the foramen lacerum — a large irregular aperture at the base of the medial pterygoid plate.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'What structures pass through the foramen magnum?',
+    opts: ['Facial and vestibulocochlear nerves','Medulla, spinal accessory nerves, vertebral arteries, and anterior/posterior spinal arteries','Hypoglossal nerve and meningeal artery','Glossopharyngeal, vagus, and spinal accessory nerves'],
+    ans: 1,
+    exp: 'The foramen magnum transmits the medulla, spinal accessory nerves, vertebral arteries, and anterior and posterior spinal arteries. It is bounded posteriorly by the occipital condyles.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The hypoglossal nerve exits the skull through:',
+    opts: ['Jugular foramen','Foramen lacerum','Foramen magnum','Anterior condylar canal (hypoglossal canal)'],
+    ans: 3,
+    exp: 'The hypoglossal nerve (CN XII) passes through the anterior condylar canal (hypoglossal canal), along with a meningeal artery.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'Which structure passes through the optic foramen?',
+    opts: ['Oculomotor nerve and ophthalmic vein','Optic nerve, ophthalmic artery, and meninges','Trochlear and abducens nerve','Maxillary division of trigeminal nerve'],
+    ans: 1,
+    exp: 'The optic foramen transmits the optic nerve (CN II), ophthalmic artery, and meninges.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The superior orbital fissure transmits all of the following EXCEPT:',
+    opts: ['Oculomotor nerve (CN III)','Trochlear nerve (CN IV)','Abducens nerve (CN VI)','Hypoglossal nerve (CN XII)'],
+    ans: 3,
+    exp: 'The superior orbital fissure transmits CN III (oculomotor), CN IV (trochlear), CN VI (abducens), ophthalmic division of CN V, and the superior ophthalmic vein. The hypoglossal nerve (CN XII) exits via the hypoglossal canal.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The jugular foramen primarily transmits which cranial nerves?',
+    opts: ['CN III, IV, VI','CN V, VI, VII','CN IX, X, XI and sigmoid sinus','CN VII, VIII'],
+    ans: 2,
+    exp: 'The jugular foramen transmits the glossopharyngeal (CN IX), vagus (CN X), and spinal accessory (CN XI) nerves, along with the sigmoid sinus and meningeal branches.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'Olfactory nerves pass through which structure to reach the brain?',
+    opts: ['Optic foramen','Cribriform plate of the ethmoid','Foramen rotundum','Superior orbital fissure'],
+    ans: 1,
+    exp: 'Olfactory nerves (CN I) pass through the cribriform plate of the ethmoid bone.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'The facial and vestibulocochlear nerves enter/exit through which structure?',
+    opts: ['Stylomastoid foramen','Jugular foramen','Internal acoustic meatus','Superior orbital fissure'],
+    ans: 2,
+    exp: 'The facial nerve (CN VII) and vestibulocochlear nerve (CN VIII) pass through the internal acoustic meatus, along with the internal auditory artery.'
+  },
+  {
+    topic: 'skull',
+    topicLabel: 'Skull & Foramina',
+    q: 'In an adult, what happens when the brain swells after injury due to the skull\'s rigid nature?',
+    opts: ['The skull expands to accommodate the swelling','The brain volume can increase beyond the capacity of the intact cranium','CSF production immediately stops','Venous sinuses expand to compensate'],
+    ans: 1,
+    exp: 'In adults, the skull is rigid. Therefore, the volume of the brain can increase beyond the capacity of the intact cranium as a result of swelling after injury, leading to dangerous increases in intracranial pressure.'
+  }
+];
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+const state = {}; // keyed by topic id
+
+function getQs(topicId) {
+  if (topicId === 'all') return [...questions];
+  return questions.filter(q => q.topic === topicId);
+}
+
+function initState(topicId) {
+  const qs = getQs(topicId);
+  state[topicId] = {
+    idx: 0,
+    score: 0,
+    answered: new Array(qs.length).fill(null), // null | index of chosen option
+    done: false,
+    qs
+  };
+}
+
+// ─────────────────────────────────────────────
+// RENDER TABS
+// ─────────────────────────────────────────────
+function buildTabs() {
+  const nav = document.getElementById('topicNav');
+  topics.forEach((t, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (t.id === 'all' ? ' all-tab' : '') + (i === 0 ? ' active' : '');
+    const qCount = getQs(t.id).length;
+    btn.innerHTML = `${t.label} <span style="opacity:0.6;font-size:11px;margin-left:4px">(${qCount})</span>`;
+    btn.dataset.topic = t.id;
+    btn.onclick = () => switchTab(t.id);
+    nav.appendChild(btn);
+  });
+}
+
+function switchTab(topicId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`[data-topic="${topicId}"]`).classList.add('active');
+  document.querySelectorAll('.quiz-section').forEach(s => s.classList.remove('active'));
+  document.getElementById(`section-${topicId}`).classList.add('active');
+}
+
+// ─────────────────────────────────────────────
+// RENDER SECTIONS
+// ─────────────────────────────────────────────
+function buildSections() {
+  const container = document.getElementById('quizContainer');
+  topics.forEach((t, i) => {
+    initState(t.id);
+    const section = document.createElement('div');
+    section.className = 'quiz-section' + (i === 0 ? ' active' : '');
+    section.id = `section-${t.id}`;
+    section.innerHTML = `
+      <div class="progress-wrap" id="progress-${t.id}">
+        <div class="progress-info">
+          <div class="progress-label">Progress</div>
+          <div class="progress-bar-bg"><div class="progress-bar-fill" id="pbar-${t.id}" style="width:0%"></div></div>
+        </div>
+        <div class="progress-count" id="pcnt-${t.id}">0 / ${state[t.id].qs.length}</div>
+        <div class="score-badge" id="sbadge-${t.id}">Score: 0</div>
+      </div>
+      <div id="qcard-${t.id}"></div>
+      <div class="results-card" id="results-${t.id}"></div>
+    `;
+    container.appendChild(section);
+    renderQuestion(t.id);
+  });
+}
+
+function renderQuestion(topicId) {
+  const s = state[topicId];
+  const card = document.getElementById(`qcard-${topicId}`);
+
+  if (s.done) {
+    showResults(topicId);
+    return;
+  }
+
+  const q = s.qs[s.idx];
+  const letters = ['A','B','C','D','E'];
+  const alreadyAnswered = s.answered[s.idx] !== null;
+  const chosen = s.answered[s.idx];
+
+  const optHtml = q.opts.map((opt, oi) => {
+    let cls = 'option-btn';
+    if (alreadyAnswered) {
+      if (oi === q.ans) cls += ' correct';
+      else if (oi === chosen && chosen !== q.ans) cls += ' wrong';
+    }
+    return `<button class="${cls}" ${alreadyAnswered ? 'disabled' : ''} onclick="pickAnswer('${topicId}',${oi})">
+      <span class="option-letter">${letters[oi]}</span>
+      <span>${opt}</span>
+    </button>`;
+  }).join('');
+
+  let feedbackHtml = '';
+  if (alreadyAnswered) {
+    const correct = chosen === q.ans;
+    feedbackHtml = `<div class="feedback-box ${correct ? 'correct' : 'wrong'}">
+      <strong>${correct ? '✓ Correct!' : '✗ Incorrect'}</strong>
+      ${q.exp}
+    </div>`;
+  }
+
+  const isLast = s.idx === s.qs.length - 1;
+
+  card.innerHTML = `
+    <div class="question-card">
+      <div class="question-meta">
+        <span class="q-num">Q${s.idx + 1} of ${s.qs.length}</span>
+        <span class="q-topic-tag">${q.topicLabel}</span>
+        <span class="q-type-tag">MCQ</span>
+      </div>
+      <div class="question-text">${q.q}</div>
+      <div class="options-grid">${optHtml}</div>
+      ${feedbackHtml}
+      <div class="nav-buttons">
+        <button class="btn btn-secondary" onclick="prevQ('${topicId}')" ${s.idx === 0 ? 'disabled' : ''}>← Previous</button>
+        <button class="btn btn-primary" onclick="nextQ('${topicId}')" ${!alreadyAnswered ? 'disabled' : ''}>
+          ${isLast ? '🏁 Finish' : 'Next →'}
+        </button>
+      </div>
+    </div>
+  `;
+  updateProgress(topicId);
+}
+
+function pickAnswer(topicId, optIdx) {
+  const s = state[topicId];
+  if (s.answered[s.idx] !== null) return;
+  s.answered[s.idx] = optIdx;
+  if (optIdx === s.qs[s.idx].ans) s.score++;
+  renderQuestion(topicId);
+}
+
+function nextQ(topicId) {
+  const s = state[topicId];
+  if (s.answered[s.idx] === null) return;
+  if (s.idx === s.qs.length - 1) {
+    s.done = true;
+    showResults(topicId);
+  } else {
+    s.idx++;
+    renderQuestion(topicId);
+  }
+}
+
+function prevQ(topicId) {
+  const s = state[topicId];
+  if (s.idx > 0) { s.idx--; renderQuestion(topicId); }
+}
+
+function updateProgress(topicId) {
+  const s = state[topicId];
+  const answered = s.answered.filter(a => a !== null).length;
+  const pct = Math.round((answered / s.qs.length) * 100);
+  document.getElementById(`pbar-${topicId}`).style.width = pct + '%';
+  document.getElementById(`pcnt-${topicId}`).textContent = `${s.idx + 1} / ${s.qs.length}`;
+  document.getElementById(`sbadge-${topicId}`).textContent = `Score: ${s.score}`;
+}
+
+function showResults(topicId) {
+  const s = state[topicId];
+  const card = document.getElementById(`qcard-${topicId}`);
+  const results = document.getElementById(`results-${topicId}`);
+  card.innerHTML = '';
+
+  const pct = Math.round((s.score / s.qs.length) * 100);
+  const wrong = s.qs.length - s.score;
+
+  let gradeClass, gradeText, emoji;
+  if (pct >= 90) { gradeClass='grade-a'; gradeText='Excellent — Outstanding Performance!'; emoji='🏆'; }
+  else if (pct >= 75) { gradeClass='grade-b'; gradeText='Good — Well Done!'; emoji='👏'; }
+  else if (pct >= 60) { gradeClass='grade-c'; gradeText='Passing — Keep Reviewing!'; emoji='📚'; }
+  else { gradeClass='grade-d'; gradeText='Needs Improvement — Study More!'; emoji='💪'; }
+
+  // per-question review table
+  const rows = s.qs.map((q, i) => {
+    const ch = s.answered[i];
+    const ok = ch === q.ans;
+    return `<tr>
+      <td><b>Q${i+1}</b></td>
+      <td>${q.q.substring(0, 70)}${q.q.length > 70 ? '…' : ''}</td>
+      <td>${ch !== null ? q.opts[ch] : '—'}</td>
+      <td>${q.opts[q.ans]}</td>
+      <td>${ch !== null ? `<span class="${ok ? 'pill-correct' : 'pill-wrong'}">${ok ? '✓' : '✗'}</span>` : '—'}</td>
+    </tr>`;
+  }).join('');
+
+  results.className = 'results-card show';
+  results.innerHTML = `
+    <div class="results-icon">${emoji}</div>
+    <div class="results-title">Exam Complete!</div>
+    <div class="results-sub">${topics.find(t=>t.id===topicId)?.label ?? ''}</div>
+    <div class="score-ring" style="--pct: ${pct * 3.6}deg">
+      <div class="score-ring-inner">
+        <div class="score-pct">${pct}%</div>
+        <div class="score-label">Score</div>
+      </div>
+    </div>
+    <div class="grade-banner ${gradeClass}">${gradeText}</div>
+    <div class="results-breakdown">
+      <div class="breakdown-item"><div class="breakdown-num">${s.qs.length}</div><div class="breakdown-label">Total</div></div>
+      <div class="breakdown-item"><div class="breakdown-num green">${s.score}</div><div class="breakdown-label">Correct</div></div>
+      <div class="breakdown-item"><div class="breakdown-num red">${wrong}</div><div class="breakdown-label">Wrong</div></div>
+    </div>
+    <div style="overflow-x:auto;margin-bottom:28px">
+      <table class="review-table">
+        <thead><tr><th>#</th><th>Question</th><th>Your Answer</th><th>Correct Answer</th><th>Result</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+    <button class="btn btn-navy" onclick="retakeExam('${topicId}')">🔄 Retake This Exam</button>
+  `;
+  document.getElementById(`pbar-${topicId}`).style.width = '100%';
+  document.getElementById(`pcnt-${topicId}`).textContent = `${s.qs.length} / ${s.qs.length}`;
+  document.getElementById(`sbadge-${topicId}`).textContent = `Final Score: ${s.score}/${s.qs.length}`;
+}
+
+function retakeExam(topicId) {
+  initState(topicId);
+  document.getElementById(`results-${topicId}`).className = 'results-card';
+  renderQuestion(topicId);
+}
+
+// INIT
+buildTabs();
+buildSections();
+document.getElementById('total-q-count').textContent = questions.length;
+</script>
+</body>
+</html>
